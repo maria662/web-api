@@ -7,20 +7,16 @@
 #include <WiFiClient.h>
 #include <DHT.h>
  
-// Definimos el pin digital donde se conecta el sensor
+// Definimos el pin digital donde se conecta el interruptor
 #define DHTPIN 2
-// Dependiendo del tipo de sensor
-#define DHTTYPE DHT11
 
-DHT dht(DHTPIN, DHTTYPE);
- 
 //#include "config.h"  // Sustituir con datos de vuestra red
 //#include "API.hpp"
 //#include "ESP8266_Utils.hpp"
 
-const char* ssid = "armandt";
-const char* password = "NgfyoiGl19";
-const char* host = "144.202.34.148";
+const char* ssid = "InternetSelecto_5E6C";
+const char* password = "cybernetmx20205E6C";
+const char* host = "192.168.1.104";
 int estadoAnterior;
 int estadoActual;
 
@@ -28,7 +24,6 @@ int estadoActual;
 void setup () {
   Serial.begin(115200);
   delay(10);
-  dht.begin();
  
   // Conectamos a la red WiFi
  
@@ -80,11 +75,11 @@ void loop() {
 void post() {
   HTTPClient http;
   String json;
-  String server = "http://144.202.34.148:3132/interruptores";
-  float t = dht.readTemperature();
+  String server = "http://192.168.1.104:3132/interruptores";
+  int t = digitalRead(2);
 
   StaticJsonDocument<256> doc;
-  doc["temperatura"] = (t);
+  doc["interruptor"] = (t);
   serializeJson(doc, json);
   
   http.begin(server);
