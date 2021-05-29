@@ -9,8 +9,16 @@ const interruptorSchema = new Schema({
 		trim: true,  
 		required: true,
 	},
-	estado: {
+	estado:{
+		type: Boolean,
+		required: true,	
+	},
+	temperatura: {
 		type: Number,
+		required: true
+	},
+	fecha: {
+		type: Date,
 		required: true
 	}
 });
